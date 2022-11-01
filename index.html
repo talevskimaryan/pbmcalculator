@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gemini EVO</title>
+<!--
+
+
+
+Curious how it's made?
+Azena Medical is always looking for talented software developers.
+Apply for a job at https://www.azenamedical.com/careers
+
+
+
+-->
+    <link rel="icon" type="image/svg" href="./svgs/favicon.svg" />
+    <link rel="stylesheet" href="./css/calculator.css" />
+  </head>
+
+    <section id="calculator">
+      <h1>Photobiomodulation Calculator</h1>
+      <p>Use this PBM calculator to determine an appropriate treatment time based on the desired treatment objective. This is directional guidance from the manufacturer and should not be interpreted as clinical advice by any means, nor should this calculator replace the necessary training required of operators to properly use the Gemini EVO for PBM applications.</p> 
+      
+      <div id="firstcalc">
+        <div id="gender">
+          <label >Select Gender<br><br></label>
+          <label id="male" class='radiolabel'><span class="customradio "></span><input type="radio" name="selectedgender" value="male" onclick="genderSelection(), calculateTimeDose()" />Male</label>
+          <label id="female" class='radiolabel'><span class="customradio"></span><input type="radio" name="selectedgender" value="female" onclick="genderSelection(), calculateTimeDose()"/>Female</label>
+          <hr>
+        </div>
+
+        <div id="bodylocation">
+          <label >Select Body Location<br><br></label>
+          <label id="foot" class='radiolabel'><span class="customradio3 "></span><input type="radio" name="selectedbodylocation" value="foot" onclick="bodyLocationSelection(), calculateTimeDose()" />Foot</label>
+          <label id="ankle" class='radiolabel'><span class="customradio3"></span><input type="radio" name="selectedbodylocation" value="ankle" onclick="bodyLocationSelection(), calculateTimeDose()"/>Ankle</label>
+          <label id="lowerleg" class='radiolabel'><span class="customradio3"></span><input type="radio" name="selectedbodylocation" value="lowerleg" onclick="bodyLocationSelection(), calculateTimeDose()"/>Lower Leg</label>
+          <label id="knee" class='radiolabel'><span class="customradio3"></span><input type="radio" name="selectedbodylocation" value="knee" onclick="bodyLocationSelection(), calculateTimeDose()"/>Knee</label>
+          <label id="thigh" class='radiolabel'><span class="customradio3"></span><input type="radio" name="selectedbodylocation" value="thigh" onclick="bodyLocationSelection(), calculateTimeDose()"/>Thigh</label>
+          <label id="hippelvis" class='radiolabel'><span class="customradio3"></span><input type="radio" name="selectedbodylocation" value="hippelvis" onclick="bodyLocationSelection(), calculateTimeDose()"/>Hip & Pelvis</label>
+          <label id="sacrum" class='radiolabel'><span class="customradio3"></span><input type="radio" name="selectedbodylocation" value="sacrum" onclick="bodyLocationSelection(), calculateTimeDose()"/>Sacrum</label>
+          <label id="lumbarspine" class='radiolabel'><span class="customradio3"></span><input type="radio" name="selectedbodylocation" value="lumbarspine" onclick="bodyLocationSelection(), calculateTimeDose()"/>Lumbar Spine</label>
+          <label id="thoracicspine" class='radiolabel'><span class="customradio3"></span><input type="radio" name="selectedbodylocation" value="thoracicspine" onclick="bodyLocationSelection(), calculateTimeDose()"/>Thoracic Spine</label>
+          <label id="cervicalspine" class='radiolabel'><span class="customradio3"></span><input type="radio" name="selectedbodylocation" value="cervicalspine" onclick="bodyLocationSelection(), calculateTimeDose()"/>Cervical Spine</label>
+          <label id="shoulder" class='radiolabel'><span class="customradio3"></span><input type="radio" name="selectedbodylocation" value="shoulder" onclick="bodyLocationSelection(), calculateTimeDose()"/>Shoulder</label>
+          <label id="elbowforearm" class='radiolabel'><span class="customradio3"></span><input type="radio" name="selectedbodylocation" value="elbowforearm" onclick="bodyLocationSelection(), calculateTimeDose()"/>Elbow & Forearm</label>
+          <label id="wristhand" class='radiolabel'><span class="customradio3"></span><input type="radio" name="selectedbodylocation" value="wristhand" onclick="bodyLocationSelection(), calculateTimeDose()"/>Wrist & Hand</label>
+          <hr>
+        </div>
+
+        <div id="tissuetype">
+          <label>Select Tissue Type<br><br></label>
+          <label id="cartilage" class='radiolabel'><span class="customradio4 "></span><input type="radio"  name="selectedtissuetype" value="cartilage" onclick="tissueTypeSelection(), calculateTimeDose()" />Cartilage</label>
+          <label id="connectivetissue" class='radiolabel'><span class="customradio4"></span><input type="radio"  name="selectedtissuetype" value="connectivetissue" onclick="tissueTypeSelection(), calculateTimeDose()"/>Connective Tissue</label>
+          <label id="ligament" class='radiolabel'><span class="customradio4"></span><input type="radio"  name="selectedtissuetype" value="ligament" onclick="tissueTypeSelection(), calculateTimeDose()"/>Ligament</label>
+          <label id="muscle" class='radiolabel'><span class="customradio4"></span><input type="radio"  name="selectedtissuetype" value="muscle" onclick="tissueTypeSelection(), calculateTimeDose()"/>Muscle</label>
+          <label id="nerve" class='radiolabel'><span class="customradio4"></span><input type="radio"  name="selectedtissuetype" value="nerve" onclick="tissueTypeSelection(), calculateTimeDose()"/>Nerve</label>
+          <label id="tendon" class='radiolabel'><span class="customradio4"></span><input type="radio"  name="selectedtissuetype" value="tendon" onclick="tissueTypeSelection(), calculateTimeDose()"/>Tendon</label>
+          <hr>
+        </div>
+
+        <div id="treatmentpurpose">
+          <label >Select Treatment Purpose<br><br></label>
+          <label id="contusionresolution" class='radiolabel'><span class="customradio5 "></span><input type="radio"  name="selectedtreatmentpurpose" value="contusionresolution" onclick="purposeSelection(), calculateTimeDose()" />Contusion Resolution</label>
+          <label id="healing"class='radiolabel'><span class="customradio5"></span><input type="radio"  name="selectedtreatmentpurpose" value="healing" onclick="purposeSelection(), calculateTimeDose()"/>Healing</label>
+          <label id="recoverypostgame" class='radiolabel'><span class="customradio5"></span><input type="radio"  name="selectedtreatmentpurpose" value="recoverypostgame" onclick="purposeSelection(), calculateTimeDose()"/>Recovery - Post Game </label>
+          <label id="recoverypregame" class='radiolabel'><span class="customradio5"></span><input type="radio"  name="selectedtreatmentpurpose" value="recoverypregame" onclick="purposeSelection(), calculateTimeDose()"/>Recovery - Pre Game </label>
+          <label id="boostperformance" class='radiolabel'><span class="customradio5"></span><input type="radio"  name="selectedtreatmentpurpose" value="boostperformance" onclick="purposeSelection(), calculateTimeDose()"/>Boost Performance </label>
+          <label id="painrelief"class='radiolabel'><span class="customradio5"></span><input type="radio"  name="selectedtreatmentpurpose" value="painrelief" onclick="purposeSelection(), calculateTimeDose()"/>Pain Relief </label>
+          <hr>
+        </div>
+
+        <div id="injurytype">
+          <label >Select Injury Type<br><br></label>
+          <label id="acute" class='radiolabel'><span class="customradio6 "></span><input type="radio" name="selectedinjurytype" value="acute" onclick="injurySelection(), calculateTimeDose()" />Acute</label>
+          <label id="chronic" class='radiolabel'><span class="customradio6"></span><input type="radio" name="selectedinjurytype" value="chronic" onclick="injurySelection(), calculateTimeDose()"/>Chronic</label>
+          <hr>
+        </div>
+
+        <div id="levelofpain">
+          <label >Select Pain Level<br><br></label>
+          <label id="low" class='radiolabel'><span class="customradio7 "></span><input type="radio" name="selectedpainlevel" value="low" onclick="painSelection(), calculateTimeDose()" />Low</label>
+          <label id="medium" class='radiolabel'><span class="customradio7"></span><input type="radio" name="selectedpainlevel" value="medium" onclick="painSelection(), calculateTimeDose()"/>Medium</label>
+          <label id="high" class='radiolabel'><span class="customradio7"></span><input type="radio" name="selectedpainlevel" value="high" onclick="painSelection(), calculateTimeDose()"/>High</label>
+          <hr>
+        </div>
+
+        <div id="skincolortype">
+          <label >Select Skin Color<br><br></label>
+          <label id="light" class='radiolabel'><span class="customradio8 "></span><input type="radio" name="skincolortype" value="light" onclick="colorSelection(), calculateTimeDose()"/>Light</label>
+          <label id="dark" class='radiolabel'><span class="customradio8"></span><input type="radio" name="skincolortype" value="dark" onclick="colorSelection(), calculateTimeDose()"/>Dark</label>
+        </div>
+
+      </div>
+      </div>
+
+      <div id="timerange1">
+        <label>Treatment per point<span></span></label><br>
+        <div id="outputs">
+        <div id="calculatedtime1">/</div>
+        <div id="calculateddose1">/</div>
+         </div>
+        <hr>
+      </div>
+    
+
+    </section>
+
+    <footer>Powered by&nbsp;<a target="_blank" href="https://www.azenamedical.com/">Azena Medical</a>&nbsp;&copy;<span id="copyright"><script>document.getElementById("copyright").appendChild(document.createTextNode(new Date().getFullYear()));</script></span></footer>
+
+    <script src="./js/calculator.js"></script>
+
+  </body>
+</html>
